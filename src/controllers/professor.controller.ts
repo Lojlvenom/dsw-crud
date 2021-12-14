@@ -18,7 +18,7 @@ export class ProfessorController {
     }
 
     @Post()
-    async criarProfessor(@Body() professor:Professor): Promise<Professor>{
+    async criarProfessor(@Body() professor:Professor): Promise<any>{
         return this.professorService.criarProfessor(professor);
     }
     

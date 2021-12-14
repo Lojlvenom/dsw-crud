@@ -14,7 +14,7 @@ export class ProfessorService {
     } 
 
     async listarPorId(_id:number){
-        let json: Array<any> = JSON.parse(localStorage.getItem('professor'));
+        let json: Array<Professor> = JSON.parse(localStorage.getItem('professor'));
         for (let i=0; i< json.length; i++){
             if (json[i]._id == _id){
                 return json[i];
@@ -26,13 +26,13 @@ export class ProfessorService {
     async criarProfessor(professor:Professor){
         let json: Array<Professor> = JSON.parse(localStorage.getItem('professor'));
         if(json.length === 0){
-            professor.id = 1
+            professor._id = 1
         } else {
-            professor.id = json.length+1;
+            professor._id = json.length+1;
         }
         json.push(professor);
         localStorage.setItem('professor', JSON.stringify(json));
-        return JSON.parse(localStorage.getItem('professor'));
+        return this.listarPorId(professor._id)
         // const professorCriado = new this.professorModel(professor); 
         // return await professorCriado.save();
     }
