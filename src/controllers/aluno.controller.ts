@@ -7,27 +7,27 @@ export class AlunoController {
     constructor(private alunoService: AlunoService){}
 
     @Get()
-    async listarTodos(): Promise<Aluno[]>{
+    async listarTodos(): Promise<any[]>{
         return this.alunoService.listarTodos();
     }
 
-    @Get(':_nome')
-    async listarPorNome(@Param('_nome') _nome:string): Promise<Aluno>{
-        return this.alunoService.listarPorNome(_nome);
-    }
+    // @Get(':_nome')
+    // async listarPorNome(@Param('_nome') _nome:string): Promise<Aluno>{
+    //     return this.alunoService.listarPorNome(_nome);
+    // }
 
-    @Post()
-    async criarAluno(@Body() aluno:Aluno): Promise<Aluno>{
-        return this.alunoService.criarAluno(aluno);
-    }
+    // @Post()
+    // async criarAluno(@Body() aluno:Aluno): Promise<Aluno>{
+    //     return this.alunoService.criarAluno(aluno);
+    // }
 
-    @Put()
-    async atualizarAluno(@Body('_nome') _nome:string, @Body() aluno:Aluno): Promise<Aluno>{
-        return this.alunoService.atualizarAluno(aluno, _nome);
-    }
+    // @Put()
+    // async atualizarAluno(@Body('_nome') _nome:string, @Body() aluno:Aluno): Promise<Aluno>{
+    //     return this.alunoService.atualizarAluno(aluno, _nome);
+    // }
 
-    @Delete()
-    async deletarNome(@Body('_nome') _nome:string) {
-        return this.alunoService.deletarAluno(_nome);
-    }
+    // @Delete()
+    // async deletarNome(@Body('_nome') _nome:string) {
+    //     return this.alunoService.deletarAluno(_nome);
+    // }
 }
