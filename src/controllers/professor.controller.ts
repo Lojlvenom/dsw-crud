@@ -11,14 +11,17 @@ export class ProfessorController {
     async listarTodos(): Promise<any[]>{
         return this.professorService.listarTodos();
     }
-    // @Get(':_id')
-    // async listarPorId(@Param('_id') _id:string): Promise<Professor>{
-    //     return this.professorService.listarPorId(_id);
-    // }
-    // @Post()
-    // async criarProfessor(@Body() professor:Professor): Promise<Professor>{
-    //     return this.professorService.criarProfessor(professor);
-    // }
+    
+    @Get(':_id')
+    async listarPorId(@Param('_id') _id:number): Promise<any>{
+        return this.professorService.listarPorId(_id);
+    }
+
+    @Post()
+    async criarProfessor(@Body() professor:Professor): Promise<Professor>{
+        return this.professorService.criarProfessor(professor);
+    }
+    
     // @Put()
     // async atualizarProfessor(@Body('_id') _id:string, @Body() professor:Professor): Promise<Professor>{
     //     return this.professorService.atualizarProfessor(_id, professor);

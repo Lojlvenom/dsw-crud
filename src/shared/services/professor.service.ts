@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { LocalStorage } from "node-localstorage";
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { stringify } from 'querystring';
@@ -9,60 +10,33 @@ export class ProfessorService {
     // constructor(@InjectModel(Professor.name) private readonly professorModel: Model<Professor>){}
 
     async listarTodos(){
-        return [
-            {
-                _id:  "60d8ad29967c085268fb5197",
-                nome: 'Benevaldo Pereira Gonçalves',
-                createdAt: new Date("2021-06-11T00:04:01.665Z"),
-                updatedAt: new Date("2021-06-11T00:04:01.665Z")
-            },
-            {
-                _id:  "60d8ad29967c085268fb5198",
-                nome: 'Paulo Sérgio Ruiz Del Aguila',
-                createdAt: new Date("2021-06-11T00:04:01.665Z"),
-                updatedAt: new Date("2021-06-11T00:04:01.665Z")
-            },
-            {
-                _id:  "60d8ad29967c085268fb5199",
-                nome: 'Albert França Josua Costa',
-                createdAt: new Date("2021-06-11T00:04:01.665Z"),
-                updatedAt: new Date("2021-06-11T00:04:01.665Z")
-            },
-            {
-                _id:  "60d8ad29967c085268fb5210",
-                nome: 'Rafaela Almeida Melo',
-                createdAt: new Date("2021-06-11T00:04:01.665Z"),
-                updatedAt: new Date("2021-06-11T00:04:01.665Z")
-            },
-            {
-                _id:  "60d8ad29967c085268fb5211",
-                nome: 'Renan Moura de Carvalho',
-                createdAt: new Date("2021-06-11T00:04:01.665Z"),
-                updatedAt: new Date("2021-06-11T00:04:01.665Z")
-            },
-            {
-                _id:  "60d8ad29967c085268fb5212",
-                nome: 'Bruna Guedes Pereira',
-                createdAt: new Date("2021-06-11T00:04:01.665Z"),
-                updatedAt: new Date("2021-06-11T00:04:01.665Z")
-            },
-            {
-                _id:  "60d8ad29967c085268fb5213",
-                nome: 'Lucas Damascendo Costa',
-                createdAt: new Date("2021-06-11T00:04:01.665Z"),
-                updatedAt: new Date("2021-06-11T00:04:01.665Z")
-            }
-        ];
+        return JSON.parse(localStorage.getItem('professor'));
     } 
 
-    // async listarPorId(_id:string){
-    //     return await this.professorModel.findById(_id).exec(); 
-    // }
+    async listarPorId(_id:number){
+        let json: Array<any> = JSON.parse(localStorage.getItem('professor'));
+        for (let i=0; i< json.length; i++){
+            if (json[i]._id == _id){
+                return json[i];
+            }
+        }
+        return [];
+    }
 
-    // async criarProfessor(professor:Professor){
-    //     const professorCriado = new this.professorModel(professor); 
-    //     return await professorCriado.save();
-    // }
+    async criarProfessor(professor:Professor){
+        let json: Array<Professor> = JSON.parse(localStorage.getItem('professor'));
+        if(json.length === 0){
+            professor.id = 1
+        } else {
+            professor.id = json.length+1;
+        }
+        json.push(professor);
+        localStorage.setItem('professor', JSON.stringify(json));
+        return JSON.parse(localStorage.getItem('professor'));
+        // const professorCriado = new this.professorModel(professor); 
+        // return await professorCriado.save();
+    }
+
     // async atualizarProfessor(_id:string, professor:Professor){
     //     this.professorModel.updateOne({_id:_id}, professor).exec();
     //     return this.listarPorId(_id)
