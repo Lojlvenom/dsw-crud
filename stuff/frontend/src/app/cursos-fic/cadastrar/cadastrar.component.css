@@ -1,0 +1,70 @@
+.input-name {
+    margin-top: 1rem;
+  }
+
+  .example-form-field {
+    margin-right: 20px;
+  }
+
+  #title-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+    height: 4rem;
+    background-color: #00914E;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+    color: white;
+    font-size: large;
+  }
+
+  .out-tab {
+    width: 100%;
+    height: max-content;
+    border: 1px solid #00914E;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .container {
+    height: 100%;
+  }
+
+  /* Altera o label do mat-form-field */
+  ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #00A85A !important;
+  }
+
+  /* Altera o underline do mat-form-field */
+  ::ng-deep .mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #00A85A !important;
+  }
+
+  /* Altera o texto animado do mat-form-field */
+  ::ng-deep .mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: #00A85A !important;;
+  }
+
+  #create-button {
+    align-items: center;
+    font-size: medium;
+    background-color: #00A85A;
+    color: white;
+    height: 3rem;
+  }
+
+  .aligin-end {
+    justify-content: right;
+    justify-items: right;
+  }

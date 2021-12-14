@@ -1,0 +1,69 @@
+table {
+    width: 100%;
+  }
+
+  #title-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+    height: 4rem;
+    background-color: #00914E;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+    color: white;
+    font-size: large;
+  }
+
+  .out-tab {
+    width: 100%;
+    height: max-content;
+    border: 1px solid #00914E;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  #search-button {
+    align-items: center;
+    font-size: medium;
+    background-color: #00A85A;
+    color: white;
+    float: right;
+    height: 3rem;
+  }
+
+  .input-position {
+    float: left;
+    display: inline-flex;
+  }
+
+  .mat-header-cell {
+    background-color: #00A85A;
+    color: white;
+    font-size: medium;
+  }
+
+  /* Altera o label do mat-form-field */
+  ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #00A85A !important;
+  }
+
+  /* Altera o underline do mat-form-field */
+  ::ng-deep .mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #00A85A !important;
+  }
+
+  /* Altera o texto animado do mat-form-field */
+  ::ng-deep .mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: #00A85A !important;;
+  }

@@ -1,0 +1,48 @@
+<mat-card id="title-table"> Lista de Cursos </mat-card>
+<mat-card class="example-container mat-elevation-z8 out-tab">
+  <form class="example-form input-position">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Buscar Curso</mat-label>
+      <input matInput placeholder="Digite o ID ou nome">
+    </mat-form-field>
+  </form>
+
+  <button mat-raised-button (click)="goToCreate()" id="search-button">Cadastrar Curso</button>
+
+  <div class="example-table-container">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nome do Curso </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Number Column -->
+      <ng-container matColumnDef="numero_turmas">
+        <th mat-header-cell *matHeaderCellDef> Nª de Turmas </th>
+        <td mat-cell *matCellDef="let element"> {{element.numero_turmas}} </td>
+      </ng-container>
+
+      <!--
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef> Data de Fim </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container> -->
+
+       <!-- See Column
+       <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</mat-card>

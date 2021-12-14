@@ -1,0 +1,23 @@
+<mat-toolbar class="toolbar-menu" color='primary'>
+  <div class="toolbar-title">
+    <div id="background-logo">
+      <img class="logo-left" src="../assets/images/icon-ifam-no-letters.png" alt="Logo do Ifam"/>
+    </div>
+    <span id="title-toolbar">SisFIC - Sistema de Gerenciamento FIC</span>
+  </div>
+  <span id="date">{{hour}}</span>
+</mat-toolbar>
+
+<div [hidden]="progressBar">
+  <mat-progress-bar id="progress-bar" mode="indeterminate"></mat-progress-bar>
+</div>
+
+<mat-tab-group (selectedTabChange)="goTo($event)">
+  <!-- <mat-tab label="Alunos"> Gabriel Costa </mat-tab>
+  <mat-tab label="Professores"> Thalles Kaik </mat-tab>
+  <mat-tab label="Cursos FIC"> <app-cursos-fic></app-cursos-fic> </mat-tab> -->
+  <mat-tab label="Turmas"> <app-turmas></app-turmas> </mat-tab>
+</mat-tab-group>
+
+<!-- <router-outlet></router-outlet> -->
+<app-footer></app-footer>

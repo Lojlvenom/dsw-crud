@@ -1,0 +1,13 @@
+.mat-tab-group {
+  color: #00A85A;
+  margin-bottom: 48px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* Altera o underline do mat-tab */
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+  background: #00A85A !important;
+}

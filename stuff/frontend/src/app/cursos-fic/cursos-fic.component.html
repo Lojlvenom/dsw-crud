@@ -1,0 +1,14 @@
+<section id="content">
+  <div id="buttons" class="row">
+    <div class="col-12 col-md-6 button-padding">
+      <button mat-button (click)="goToList()" class="button w-100 mat-elevation-z2"> Listar Cursos </button>
+    </div>
+
+    <div class="col-12 col-md-6 button-padding">
+      <button mat-button (click)="goToCreate()" class="button w-100 mat-elevation-z2"> Cadastrar Curso </button>
+    </div>
+  </div>
+
+  <router-outlet name="curso"></router-outlet>
+
+ </section>

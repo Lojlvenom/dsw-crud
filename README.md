@@ -1,59 +1,73 @@
-# dsw-crud
-
 <p align="center">
-  <img src="https://img.shields.io/badge/npm-7.18.1-red?style=flat&logo=npm&logoColor=white"> <img src="https://img.shields.io/badge/node-v16.4.2-green?style=flat&logo=node.js&logoColor=white"> <img src="https://img.shields.io/badge/nestjs-v7.6.0-green?style=flat&logo=nestjs&logoColor=white"> <img src="https://img.shields.io/badge/MongoDB-latest-green?style=flat&logo=mongodb&logoColor=white">
-  <img src="https://img.shields.io/badge/docker--compose-3.1-blue?style=flat&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/docker-20.10.2-blue?style=flat&logo=docker&logoColor=white">
-  <img src="https://img.shields.io/badge/bash-5.0.17-red?style=flat&logo=gnubash&logoColor=white"> <img src="https://img.shields.io/badge/Ubuntu-20.04.2%20LTS-yellow?style=flat&logo=ubuntu&logoColor=white"> <img src="https://img.shields.io/badge/Linux-5.8.0-yellow?style=flat&logo=ubuntu&logoColor=white">
-</p> <br>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+</p>
 
-# Requisitos para rodar aplicação:
-✴️ Docker e docker-compose<br>
-✴️ De preferência sistema operacional Linux (Ubuntu/Debian)<br>
-✴️ Terminal bash para executar os scripts<br>
-✴️ O computador deve ter acesso à internet para baixar as dependências do projeto na primeira execução<br><br>
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-# Executando a Aplicação
-<p>Baixe o repositório:</p>
+## Description
 
-```bash
-git clone https://github.com/perotedev/dsw-crud.git
-```
-<div id="backend_exex"></div>
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## 🖥️ Frontend Angular e Backend NestJS
-Primeiro certifique-se de que as portas **5050**, **4040** e **27027** do seu computador não estão sendo utilizadas por outras aplicações, é necessário que as mesmas estejam disponíveis.<br>
-Entre na pasta raiz do repositório **`"dsw-crud"`** pelo terminal e execute o comando:
-
-```bash
-# para executar apenas na primeira vez que rodar a aplicação
-./devops/app.sh build
-```
-<p>Aguarde até que o terminal mostre a mensagem abaixo: </p>
-
-```bash
-Backend iniciado em  http://localhost:4040 💡
-Frontend iniciado em  http://localhost:5050 💡
-```
-
-Após isso a aplicação estará sendo executada.<br><br>
-
-**Para rodar a aplicação da segunda vez em diante use os seguintes comandos na raiz do repositório `"dsw-crud"` pelo terminal para iniciar ou parar a execução:**<br>
+## Installation
 
 ```bash
-# para iniciar a aplicação
-./devops/app.sh start
-
-# para parar a aplicação
-./devops/app.sh stop
+$ npm install
 ```
-<br>
 
-Para **remover** todos os containers criados pela aplicação entre na pasta raiz do repositório **`"dsw-crud"`** pelo terminal e execute o comando:
+## Running the app
 
 ```bash
-# para remover todos os containers da aplicação
-./devops/app.sh remove
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
 ```
 
-⚠️ Caso remova os containers da aplicação, ao executá-la novamente deverá ser utilizado o comando `./devops/app.sh build` novamente pois será necessário criar os containers novamente.
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](LICENSE).
