@@ -1,4 +1,7 @@
 # .github/workflows/heroku-deploy.yml
+on:
+  push:
+    branches: master
 jobs:
   heroku-deploy:
     runs-on: ubuntu-latest
