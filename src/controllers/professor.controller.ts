@@ -1,5 +1,5 @@
-import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
-import { get } from 'http';
+import { Controller, Get, Param, Post, Body, Delete, Patch, Res, Query, HttpCode } from '@nestjs/common';
+import { Response } from 'express';
 import { Professor } from 'src/shared/schemas/professor.schema';
 import { ProfessorService } from 'src/shared/services/professor.service';
 
@@ -22,17 +22,27 @@ export class ProfessorController {
         return this.professorService.criarProfessor(professor);
     }
     
-    // @Put()
-    // async atualizarProfessor(@Body('_id') _id:string, @Body() professor:Professor): Promise<Professor>{
-    //     return this.professorService.atualizarProfessor(_id, professor);
-    // }
-    // @Delete()
-    // async deletarProfessor(@Body('_id') _id:string){
-    //     return this.professorService.deletarProfessor(_id);
-    // }
-    // @Post()
-    // async listarPorNome(@Body('nome') nome:string): Promise<Professor[]>{
-    //     return this.professorService.listarPorNome(nome);
-    // } 
+    @Patch()
+    async atualizarProfessor(@Body('_id') _id:number, @Body() professor:Professor): Promise<any>{
+        return this.professorService.atualizarProfessor(_id, professor);
+    }
+
+    @Delete(':_id')
+    async deletarProfessor(@Param('_id') _id:number, @Res() response:Response ){
+        let isDeleted = this.professorService.deletarProfessor(_id);
+        isDeleted.then( res => {
+            if (!res){
+                response.status(404).send('');
+            } else {
+                response.status(200).send('');
+            }
+        });
+    }
+
+    @Post('buscar-termo')
+    @HttpCode(200)
+    async listarPorNome(@Body('termo') termo:string): Promise<any[]>{
+        return this.professorService.listarPorNome(termo);
+    } 
 
 }
