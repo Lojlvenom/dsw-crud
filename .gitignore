@@ -147,3 +147,5 @@ lint/tmp/
 **/out-tsc
 # Only exists if Bazel was run
 **/bazel-out
+
+dsw-storage
