@@ -3,7 +3,7 @@ import {Document, SchemaTypes, Types} from "mongoose";
 
 @Schema({ timestamps: false, versionKey: false, toJSON: { virtuals: true}, id: false})
 export class CursoFic extends Document{
-    _id: string;
+    _id: number;
 
     @Prop()
     ID: number;
