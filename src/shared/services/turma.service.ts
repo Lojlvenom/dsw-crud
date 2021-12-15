@@ -1,7 +1,8 @@
+import { Aluno } from 'src/shared/schemas/aluno.schema';
 import { Turma } from '../schemas/turma.schema';
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+// import { InjectModel } from '@nestjs/mongoose';
+// import { Model } from 'mongoose';
 
 @Injectable()
 export class TurmaService {
@@ -9,131 +10,160 @@ export class TurmaService {
 
     async listarTodas(expand:string)
     {
-        // let virtuals;
-        // if (expand == undefined){
-        //     virtuals = [];
-        // } else {
-        //     virtuals = expand.split(",");
-        // }
-        return [
-            {
-                _id : "60d8ad29967c085268fb5194",
-                alunosId : [
-                        "60d8ad29967c085268fb5186",
-                        "60d8ad29967c085268fb5187"
-                ],
-                ID : 1,
-                nome : "Tecnico Básico I",
-                dataInicio : new Date("2021-06-29T00:04:01.665Z"),
-                dataFim : new Date("2021-10-29T00:04:01.665Z"),
-                cursoId : "60d8ad29967c085268fb5191",
-                professorId : "60d8ad29967c085268fb5197",
-                createdAt : new Date("2021-08-11T00:19:59.894Z"),
-                updatedAt : new Date("2021-08-11T00:21:03.433Z")
-            },
-            {
-                _id : "60d8ad29967c085268fb5195",
-                alunosId : [
-                        "60d8ad29967c085268fb5188",
-                        "60d8ad29967c085268fb5189"
-                ],
-                ID : 2,
-                nome : "Técnico Avançado II",
-                dataInicio : new Date("2021-06-29T00:04:01.665Z"),
-                dataFim : new Date("2021-10-29T00:04:01.665Z"),
-                cursoId : "60d8ad29967c085268fb5192",
-                professorId : "60d8ad29967c085268fb5199",
-                createdAt : new Date("2021-08-11T00:19:59.894Z"),
-                updatedAt : new Date("2021-08-11T00:21:03.433Z")
-            },
-            {
-                _id : "60d8ad29967c085268fb5196",
-                alunosId : [
-                        "60d8ad29967c085268fb5189",
-                        "60d8ad29967c085268fb5187"
-                ],
-                ID : 3,
-                nome : "Iniciante I",
-                dataInicio : new Date("2021-06-29T00:04:01.665Z"),
-                dataFim : new Date("2021-10-29T00:04:01.665Z"),
-                cursoId : "60d8ad29967c085268fb5193",
-                professorId : "60d8ad29967c085268fb5197",
-                createdAt : new Date("2021-08-11T00:19:59.894Z"),
-                updatedAt : new Date("2021-08-11T00:21:03.433Z")
-            },
-            {
-                _id : "60d8ad29967c085268fb5230",
-                alunosId : [
-                        "60d8ad29967c085268fb5222",
-                        "60d8ad29967c085268fb5221",
-                        "60d8ad29967c085268fb5220",
-                        "60d8ad29967c085268fb5190"
-                ],
-                ID : 4,
-                nome : "Iniciante III",
-                dataInicio : new Date("2021-06-29T00:04:01.665Z"),
-                dataFim : new Date("2021-10-29T00:04:01.665Z"),
-                cursoId : "60d8ad29967c085268fb5216",
-                professorId : "60d8ad29967c085268fb5197",
-                createdAt : new Date("2021-08-11T00:19:59.894Z"),
-                updatedAt : new Date("2021-08-11T00:21:03.433Z")
+        let virtuals: Array<any>;
+        if (expand == undefined){
+            virtuals = [];
+        } else {
+            virtuals = expand.split(",");
+        }
+        let json: Array<Turma> = JSON.parse(localStorage.getItem('turma'));
+        if (virtuals.length > 0){
+            for (let i=0; i< json.length; i++){
+                let expand = this.getExpands(virtuals, json[i]);
+                expand.then( (res:any) => {
+                    for (let element of res){
+                        Object.entries(element).forEach(
+                            ([key, value]) => {
+                                json[i][key] = value;
+                            }
+                        );
+                    }
+                });
             }
-        ];
+        }
+        return json;
     }
 
-    // async listarPorId(_id:string,expand:string)
-    // {
-    //     let virtuals;
-    //     if (expand == undefined){
-    //         virtuals = [];
-    //     } else {
-    //         virtuals = expand.split(",");
-    //     }
-    //     return this.turmaModel.findById(_id).populate(virtuals).exec();
-    // }
+    async listarPorId(_id:number,expand:string)
+    {
+        let virtuals: Array<any>;
+        if (expand == undefined){
+            virtuals = [];
+        } else {
+            virtuals = expand.split(",");
+        }
+        let json: Array<Turma> = JSON.parse(localStorage.getItem('turma'));
+        for (let i=0; i< json.length; i++){
+            if (json[i]._id == _id){
+                if (virtuals.length > 0){
+                    let expand = this.getExpands(virtuals, json[i]);
+                    expand.then( (res:any) => {
+                        for (let element of res){
+                            Object.entries(element).forEach(
+                                ([key, value]) => {
+                                    json[i][key] = value;
+                                }
+                            );
+                        }
+                    });
+                }
+                return json[i];
+            }
+        }
+        return [];
+    }
 
-    // async listarPorNomeID(termo:any,expand:string)
-    // {
-    //     const onlyNumbers = /^\d+$/.test(termo);
-    //     let virtuals;
-    //     if (expand == undefined){
-    //         virtuals = [];
-    //     } else {
-    //         virtuals = expand.split(",");
-    //     }
-    //     if (onlyNumbers){
-    //         return this.turmaModel.find({ID: termo}).populate(virtuals).sort({nome: 1}).limit(10).exec();
-    //     } else {
-    //         return this.turmaModel.find({nome: {$regex: termo, $options: "i"}}).populate(virtuals).sort({nome: 1}).limit(10).exec();
-    //     }
-    // }
+    async listarPorNome(termo:string,expand:string)
+    {
+        let virtuals: Array<any>;
+        if (expand == undefined){
+            virtuals = [];
+        } else {
+            virtuals = expand.split(",");
+        }
+        let json: Array<Turma> = JSON.parse(localStorage.getItem('turma'));
+        let arrayResponse: Array<Turma> = [];
+        for (let i=0; i< json.length; i++){
+            if (json[i].nome.toLowerCase().includes(termo) || json[i].nome.includes(termo)){
+                if (virtuals.length > 0){
+                    let expand = this.getExpands(virtuals, json[i]);
+                    expand.then( (res:any) => {
+                        for (let element of res){
+                            Object.entries(element).forEach(
+                                ([key, value]) => {
+                                    json[i][key] = value;
+                                }
+                            );
+                        }
+                    });
+                }
+                arrayResponse.push(json[i]);
+            }
+        }
+        return arrayResponse;
+    }
 
-    // async criarTurma(turma:Turma)
-    // {
-    //     let id: number;
-    //     let qtdTurmas = await this.turmaModel.find().sort({ID: -1}).limit(1).exec();
-    //     const turmaCriada = new this.turmaModel(turma);
-    //     if(qtdTurmas.length>0){
-    //         id = qtdTurmas[0].ID;
-    //         turmaCriada.ID = id+1;
-    //     } else {
-    //         turmaCriada.ID = 1;
-    //     }
-    //     return await turmaCriada.save();
-    // }
+    async criarTurma(turma:Turma)
+    {
+        let json: Array<Turma> = JSON.parse(localStorage.getItem('turma'));
+        if(json.length == 0){
+            turma._id = 1
+        } else {
+            turma._id = json[json.length-1]._id + 1;
+        }
+        json.push(turma);
+        if (turma.nome != undefined) {
+            localStorage.setItem('turma', JSON.stringify(json));
+        }
+        return this.listarPorId(turma._id, '')
+    }
 
-    // async atualizarTurma(_id:string, turma:Turma, expand:string)
-    // {
-    //     await this.turmaModel.updateOne({_id:_id}, turma).exec();
-    //     return this.listarPorId(_id, expand);
-    // }
+    async atualizarTurma(_id:number, turma:Turma, expand:string)
+    {
+        let json: Array<Turma> = JSON.parse(localStorage.getItem('turma'));
+        for (let i=0; i< json.length; i++){
+            if (json[i]._id == _id){
+                json[i] = turma;
+                localStorage.setItem('turma', JSON.stringify(json));
+                return this.listarPorId(_id, expand);
+            }
+        }
+        return [];
+    }
 
-    // async deletarTurma(_id:string)
-    // {
-    //     return await this.turmaModel.deleteOne({_id:_id}).exec();
-    // }
+    async deletarTurma(_id:number)
+    {
+        let json: Array<Turma> = JSON.parse(localStorage.getItem('turma'));
+        for (let i=0; i< json.length; i++){
+            if (json[i]._id == _id){
+                json.splice(i, 1);
+                localStorage.setItem('turma', JSON.stringify(json));
+                return true;
+            }
+        }
+        return false;
+    }
 
-    // async listarTurmasNaArray(turmasId:string[]){
-    //     return await this.turmaModel.find({_id: {$in:turmasId}}).sort({nome: 1}).exec();
-    // }
+    async getExpands(virtuals:Array<string>, turma:Turma){
+        let arrayResponse = new Array<any>();
+        for (let i=0; i < virtuals.length; i++){
+            if (virtuals[i] == 'professor'){
+                let professores = JSON.parse(localStorage.getItem('professor'));
+                for (let i=0; i < professores.length; i++){
+                    if (professores[i]._id == turma.professorId){
+                        arrayResponse.push({professor: professores[i]});
+                    }
+                }
+            } else if (virtuals[i] == 'curso'){
+                let curso = JSON.parse(localStorage.getItem('cursoFic'));
+                for (let i=0; i < curso.length; i++){
+                    if (curso[i]._id == turma.cursoId){
+                        arrayResponse.push({curso: curso[i]});
+                    }
+                }
+            } else if (virtuals[i] == 'alunos'){
+                let arrayAlunos = new Array<Aluno>();
+                let alunos = JSON.parse(localStorage.getItem('aluno'));
+                for (let i=0; i < alunos.length; i++){
+                    for (let x=0; x < turma.alunosId.length; x++){
+                        if (alunos[i]._id == turma.alunosId[x]){
+                            arrayAlunos.push(alunos[i]);
+                        }
+                    }
+                }
+                arrayResponse.push({alunos: arrayAlunos});
+            }
+        }
+        return arrayResponse;
+    }
 }

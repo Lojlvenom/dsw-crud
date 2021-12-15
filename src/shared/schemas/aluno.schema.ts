@@ -3,7 +3,7 @@ import { Document, SchemaTypes, Types } from "mongoose";
 
 @Schema({ timestamps: true, versionKey: false, id: false })
 export class Aluno extends Document{
-    _id: string;
+    _id: number;
 
     @Prop({required: true})
     nome: string;

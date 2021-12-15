@@ -3,7 +3,7 @@ import { Document, SchemaTypes, Types } from "mongoose";
 
 @Schema({ timestamps: true, versionKey: false, id: false })
 export class Professor extends Document{
-    _id: string;
+    _id: number;
 
     @Prop({required: true, maxlength:50})
     nome: string;

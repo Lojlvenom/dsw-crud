@@ -1,6 +1,7 @@
 import { TurmaService } from './../shared/services/turma.service';
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Query, Patch, Res } from '@nestjs/common';
 import { Turma } from 'src/shared/schemas/turma.schema';
+import { Response } from 'express';
 
 @Controller('turma')
 export class TurmaController {
@@ -12,36 +13,43 @@ export class TurmaController {
         return this.turmaService.listarTodas(expand);
     }
 
-    // @Get(':_id')
-    // async listarPorId(@Param('_id') _id:string, @Query('expand') expand:string): Promise<Turma>
-    // {
-    //     return this.turmaService.listarPorId(_id, expand);
-    // }
+    @Get(':_id')
+    async listarPorId(@Param('_id') _id:number, @Query('expand') expand:string): Promise<any>
+    {
+        return this.turmaService.listarPorId(_id, expand);
+    }
 
-    // @Post('listar-nome-id')
-    // @HttpCode(200)
-    // async listarPorNomeID(@Body('termo') termo:any, @Query('expand') expand:string): Promise<Turma[]>
-    // {
-    //     return this.turmaService.listarPorNomeID(termo, expand);
-    // }
+    @Post('buscar-termo')
+    @HttpCode(200)
+    async listarPorNomeID(@Body('termo') termo:string, @Query('expand') expand:string): Promise<any[]>
+    {
+        return this.turmaService.listarPorNome(termo, expand);
+    }
 
-    // @Post()
-    // async criarTurma(@Body() turma:Turma): Promise<Turma>
-    // {
-    //     return this.turmaService.criarTurma(turma);
-    // }
+    @Post()
+    async criarTurma(@Body() turma:Turma): Promise<any>
+    {
+        return this.turmaService.criarTurma(turma);
+    }
 
-    // @Put()
-    // async atualizarTurma(@Body('_id') _id:string, @Body() turma:Turma, @Query('expand') expand:string): Promise<Turma>
-    // {
-    //     return this.turmaService.atualizarTurma(_id, turma, expand);
-    // }
+    @Patch()
+    async atualizarTurma(@Body('_id') _id:number, @Body() turma:Turma, @Query('expand') expand:string): Promise<any>
+    {
+        return this.turmaService.atualizarTurma(_id, turma, expand);
+    }
 
-    // @Delete(':_id')
-    // async deletarTurma(@Param('_id') _id:string)
-    // {
-    //     return this.turmaService.deletarTurma(_id);
-    // }
+    @Delete(':_id')
+    async deletarTurma(@Param('_id') _id:number, @Res() response: Response)
+    {
+        let isDeleted = this.turmaService.deletarTurma(_id);
+        isDeleted.then( res => {
+            if (!res){
+                response.status(404).send('');
+            } else {
+                response.status(200).send('');
+            }
+        });
+    }
 
     // @Post('listar-array')
     // async listarlistarTurmasNaArray(@Body('turmasId') post:string[]): Promise<Turma[]>

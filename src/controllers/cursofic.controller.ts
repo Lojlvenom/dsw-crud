@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Patch, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { CursoFic } from 'src/shared/schemas/cursoFic.schema';
 import { CursoFicService } from 'src/shared/services/cursofic.service';
 
@@ -12,34 +13,41 @@ export class CursoFicController {
         return this.cursoFicService.listarCursos();
     }
 
-    // @Get(':_id')
-    // async listarCursoPorId(@Param('_id' ) _id:string): Promise<CursoFic>
-    // {
-    //     return this.cursoFicService.listarCursoPorId(_id);
-    // }
+    @Get(':_id')
+    async listarCursoPorId(@Param('_id' ) _id:number): Promise<any>
+    {
+        return this.cursoFicService.listarCursoPorId(_id);
+    }
 
-    // @Post('listar-curso-nome-id')
-    // @HttpCode(200)
-    // async listarCursosPorNomeID(@Body('termo') termo:any): Promise<CursoFic[]>
-    // {
-    //     return this.cursoFicService.listarCursoPorNomeID(termo);
-    // }
+    @Post('buscar-termo')
+    @HttpCode(200)
+    async listarCursosPorNomeID(@Body('termo') termo:any): Promise<any[]>
+    {
+        return this.cursoFicService.listarCursoPorNome(termo);
+    }
 
-    // @Post()
-    // async criarCurso(@Body() curso:CursoFic): Promise<CursoFic>
-    // {
-    //     return this.cursoFicService.criarCurso(curso);
-    // }
+    @Post()
+    async criarCurso(@Body() curso:CursoFic): Promise<any>
+    {
+        return this.cursoFicService.criarCurso(curso);
+    }
 
-    // @Put()
-    // async atualizarCurso(@Body('_id') _id:string, @Body() curso:CursoFic): Promise<CursoFic>
-    // {
-    //     return this.cursoFicService.atualizarCurso(_id, curso);
-    // }
+    @Patch()
+    async atualizarCurso(@Body('_id') _id:number, @Body() curso:CursoFic): Promise<any>
+    {
+        return this.cursoFicService.atualizarCurso(_id, curso);
+    }
 
-    // @Delete()
-    // async deletarCurso(@Body('_id') _id:string)
-    // {
-    //     return this.cursoFicService.deletarCurso(_id);
-    // }
+    @Delete(':_id')
+    async deletarCurso(@Param('_id') _id:number, @Res() response: Response)
+    {
+        let isDeleted = this.cursoFicService.deletarCurso(_id);
+        isDeleted.then( res => {
+            if (!res){
+                response.status(404).send('');
+            } else {
+                response.status(200).send('');
+            }
+        });
+    }
 }
