@@ -1,3 +1,6 @@
+import { Aluno } from 'src/shared/schemas/aluno.schema';
+import { Professor } from 'src/shared/schemas/professor.schema';
+import { CursoFic } from 'src/shared/schemas/cursoFic.schema';
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, SchemaTypes, Types } from "mongoose";
 
@@ -25,6 +28,12 @@ export class Turma extends Document{
 
     // @Prop({ type: [ SchemaTypes.ObjectId ], ref: 'Aluno', required: true })
     alunosId: number[];
+
+    curso: CursoFic;
+
+    professor: Professor;
+
+    alunos: Aluno[];
 }
 
 export const TurmaSchema = SchemaFactory.createForClass(Turma);
